@@ -22,6 +22,14 @@ builder.Services.AddIdentityServer()
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
 
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseNpgsql("name=ConnectionStrings:DefaultConnection"));
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
@@ -31,6 +39,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    });
 }
 else
 {

@@ -10,6 +10,7 @@ const PROXY_CONFIG = [
       "/_configuration",
       "/.well-known",
       "/Identity",
+      "/swagger",
       "/connect",
       "/ApplyDatabaseMigrations",
       "/_framework"
